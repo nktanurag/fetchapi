@@ -11,19 +11,19 @@ Welcome to the Product Catalog App, a React-based web application that fetches p
 
 # Technologies Used:
 
-• React: A popular JavaScript library for building interactive user interfaces.
-• Redux: A state management library that helps maintain a centralized state for the entire application.
-• React Router: A tool enabling seamless navigation and routing within the React application.
-• HTML and CSS: To create the app's structure and define its visual styles.
-• External Product API: The app fetches product data from an external API to ensure up-to-date product information.
+1. React: A popular JavaScript library for building interactive user interfaces.
+2. Redux: A state management library that helps maintain a centralized state for the entire application.
+3. React Router: A tool enabling seamless navigation and routing within the React application.
+4. HTML and CSS: To create the app's structure and define its visual styles.
+5. External Product API: The app fetches product data from an external API to ensure up-to-date product information.
 
 # Getting Started:
 To run the Product Catalog App locally on your machine, follow these steps:
 
-• Clone the repository from GitHub.
-• Install the required dependencies using npm or yarn.
-• Run the development server using npm start or yarn start.
-• Access the app through your preferred web browser at localhost:3000.
+1. Clone the repository from GitHub.
+2. Install the required dependencies using npm or yarn.
+3. Run the development server using npm start or yarn start.
+4. Access the app through your preferred web browser at localhost:3000.
 
 
 # Contributing:
