@@ -2,53 +2,69 @@ import React, {useEffect} from 'react';
 import { connect } from 'react-redux' //The connect function is a higher-order function that connects the Redux store to a React component
 import { useState } from 'react';
 
-//bring asynchronus fetchPosts action
-import { fetchProducts } from '../actions/productsActions'
 import { Product } from '../components/Product'
-import { render } from 'react-dom';
+import { getProductsSuccess } from '../actions/productsActions';
+import { getProducts } from '../actions/productsActions';
+import { getProductsFailure } from '../actions/productsActions';
 
+function fetchProducts(searchText) {
+    return async (dispatch) => {
+        // console.log(searchText)
+        dispatch(getProducts())
+        try {
+            const response = await fetch('https://dummyjson.com/products')
+            const data = await response.json()
+            
+            let newdata
+            if(data.products  && Object.keys(data.products).length){ 
+                if(searchText !== '') {
+                    newdata = data.products.filter((product) => {
+                        return product.title.toLowerCase().includes(searchText.toLowerCase())
+                    })
+                }
+                else{
+                    newdata = data.products
+                }
+            }
+            dispatch(getProductsSuccess(newdata))
+        }catch(error){
+            dispatch(getProductsFailure())
+        }
+    }
+}
 function ProductsPage({ dispatch, loading, products, hasErrors }) {
     const [searchText, setSearchText] = useState('')
 
-    // useEffect(() => {
-    //     const id = setTimeout(() => {
-    //         dispatch(fetchProducts(searchText))
-    //     }, 1000)
-    //     // clearTimeout(id)
-    // },[dispatch, searchText])
+    useEffect(() => {
+        const id = setTimeout(() => {
+            dispatch(fetchProducts(searchText))
+        }, 1000)
+        //why return (?)
+        return () => clearTimeout(id)
+    },[dispatch, searchText])
     
     //showing loading,eror or success state
     const renderProducts = () => {
         if(loading) return <p style={{color: 'white'}}>loading products...</p>
         if(hasErrors) return <p style={{color: 'white'}}>unable to display products</p>
         //console.log(typeof products, products);
-        console.log(products)
-        if(products  && Object.keys(products).length){ 
-            return products.products.map(product => 
+        
+        if(products && Object.keys(products).length){ 
+            return products.map(product => 
                 <Product key={product.id} product={product} excerpt/>
             )
         }       
-        //     else {
-        //         let listToDisplay = products.products.filter((product) => {
-        //             return product.title.toLowerCase().includes(searchText.toLowerCase())
-        //         })
-        //         console.log(listToDisplay)
-        //         return listToDisplay.map(product => 
-        //             <Product key={product.id} product={product} excerpt/>
-        //     )}
-        // }
-        // console.log(products)
     }
 
     return (
         <>
-            {/* <input 
+            <input 
                 id='search--product--page' 
                 type='text' 
                 value={searchText} 
                 onChange={(e) => setSearchText(e.target.value)} 
                 placeholder='Search your product...'
-            /> */}
+            />
             <section className='productsPage--section'>
                 <h1 style={{color: 'white'}}>Products</h1>
                 {renderProducts()}

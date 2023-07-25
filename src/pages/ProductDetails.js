@@ -29,7 +29,6 @@ const ProductDetails = ( { dispatch, products, comments, hasErrors, loading } ) 
     },[dispatch])
 
     function showProductReview( comments ){
-        console.log(comments)
         if(comments && Object.keys(comments).length){
             return comments.map(comment => {
                 return( 
@@ -61,7 +60,6 @@ const ProductDetails = ( { dispatch, products, comments, hasErrors, loading } ) 
                         </div>
                     </div>
                 );
-
             }
         })
     }

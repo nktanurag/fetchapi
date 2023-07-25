@@ -223,3 +223,16 @@ input[type=submit]:hover {
   margin: 15px;
   width: 95%;
 }
+
+#list--item {
+  margin: auto;
+  padding: 10px;
+  align-items: center;
+}
+.ordered--list {
+  margin-left: 20px;
+  
+}
+ol {
+  float: none;
+}
