@@ -22,8 +22,8 @@ export function fetchProducts() {
         try {
             const response = await fetch('https://dummyjson.com/products')
             const data = await response.json()
-            dispatch(getProductsSuccess(data))
-            console.log(data)
+            dispatch(getProductsSuccess(data.products))
+            //console.log(data)
         }catch(error){
             dispatch(getProductsFailure())
         }

@@ -13,6 +13,7 @@ export const Product = ( {product, excerpt} ) => {
     const manageClick = () => {
         navigate(`/products/${product.id}`)  
     }
+    // console.log(product,'llll')
     return (
         <div className="shop--cart">
             <img className="cart--image" src={product.thumbnail} alt={product.title} />

@@ -19,7 +19,6 @@ const ProductDetails = ( { dispatch, products, comments, hasErrors, loading } ) 
     let { productId } = useParams()
     productId = Number(productId)
 
-
     useEffect(() => {
         dispatch(fetchProducts())
     },[dispatch])
@@ -28,6 +27,7 @@ const ProductDetails = ( { dispatch, products, comments, hasErrors, loading } ) 
         dispatch(fetchComments())
     },[dispatch])
 
+    console.log(products)
     function showProductReview( comments ){
         if(comments && Object.keys(comments).length){
             return comments.map(comment => {
@@ -39,8 +39,9 @@ const ProductDetails = ( { dispatch, products, comments, hasErrors, loading } ) 
             })
         }
     }
-    if(products  && Object.keys(products).length){           
-        return products.products.map(product => {
+
+    if(products && Object.keys(products).length){           
+        return products.map(product => {
             if(product.id === productId){
                 return (
                     <div>

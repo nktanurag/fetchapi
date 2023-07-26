@@ -9,14 +9,14 @@ import { getProductsFailure } from '../actions/productsActions';
 
 function fetchProducts(searchText) {
     return async (dispatch) => {
-        // console.log(searchText)
+        //console.log(searchText)
         dispatch(getProducts())
         try {
             const response = await fetch('https://dummyjson.com/products')
             const data = await response.json()
-            
+            console.log(data)
             let newdata
-            if(data.products  && Object.keys(data.products).length){ 
+            if(data && data.products  && Object.keys(data.products).length){ 
                 if(searchText !== '') {
                     newdata = data.products.filter((product) => {
                         return product.title.toLowerCase().includes(searchText.toLowerCase())
@@ -26,6 +26,7 @@ function fetchProducts(searchText) {
                     newdata = data.products
                 }
             }
+            //console.log('newdata',newdata)
             dispatch(getProductsSuccess(newdata))
         }catch(error){
             dispatch(getProductsFailure())
@@ -34,7 +35,7 @@ function fetchProducts(searchText) {
 }
 function ProductsPage({ dispatch, loading, products, hasErrors }) {
     const [searchText, setSearchText] = useState('')
-
+    console.log(products)
     useEffect(() => {
         const id = setTimeout(() => {
             dispatch(fetchProducts(searchText))
@@ -48,7 +49,7 @@ function ProductsPage({ dispatch, loading, products, hasErrors }) {
         if(loading) return <p style={{color: 'white'}}>loading products...</p>
         if(hasErrors) return <p style={{color: 'white'}}>unable to display products</p>
         //console.log(typeof products, products);
-        
+        console.log(products)
         if(products && Object.keys(products).length){ 
             return products.map(product => 
                 <Product key={product.id} product={product} excerpt/>
