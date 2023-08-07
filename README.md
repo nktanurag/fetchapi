@@ -9,6 +9,8 @@ Welcome to the Product Catalog App, a React-based web application that fetches p
 
 3. User Reviews Section: Users can provide product feedback by leaving reviews and ratings. The app features a review section for each product, showcasing the comments and ratings submitted by previous customers. This functionality empowers users to make informed decisions based on the experiences of others.
 
+4. Product Search with Debouncing: The app features an intelligent product search functionality that dynamically filters products based on the words contained in their titles. As users type in the search box, the app utilizes debouncing to optimize performance by reducing unnecessary API requests. The app waits for a short period of inactivity after each keystroke before sending the search query to the server, thus preventing excessive API calls and ensuring a smooth user experience.
+
 # Technologies Used:
 
 1. React: A popular JavaScript library for building interactive user interfaces.
