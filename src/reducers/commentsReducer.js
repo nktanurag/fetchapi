@@ -1,7 +1,7 @@
 import * as actions from '../actions/commentsAction'
 
 export const initialState = {
-    comments: [{
+    commentList: [{
         id:0,
         productId:1,
         name :'Ankit Anurag',
@@ -40,12 +40,12 @@ export default function commentsReducer(state = initialState, action){
             return { ...state, loading: true }
         case actions.GET_COMMENTS_SUCCESS:
             //console.log(action,'in prod reducer')
-            return { ...state, comments: action.payload, loading: false, hasErrors: false }
+            return { ...state, commentList: action.payload, loading: false, hasErrors: false }
         case actions.GET_COMMENTS_FAILURE:
             return {...state, loading: false, hasErrors: true }
         case actions.ADD_COMMENT:
             // console.log({ ...state, comments: [...state.comments, action.payload] })
-            return { ...state, comments: [...state.comments, action.payload] }
+            return { ...state, commentList: [...state.commentList, action.payload] }
         case actions.ADD_COMMENT_SUCCESS:
             return state
         case actions.ADD_COMMENT_FAILURE:

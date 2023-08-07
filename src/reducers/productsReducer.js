@@ -1,7 +1,7 @@
 import * as actions from '../actions/productsActions'
 
 export const initialState = {
-    products: [],
+    productList: [],
     loading: false,
     hasErrors: false,
 };
@@ -11,7 +11,7 @@ export default function productsReducer(state = initialState, action) {
         case actions.GET_PRODUCTS:
             return { ...state, loading: true }
         case actions.GET_PRODUCTS_SUCCESS:
-            return { products: action.payload, loading: false, hasErrors: false }
+            return { productList: action.payload, loading: false, hasErrors: false }
         case actions.GET_PRODUCTS_FAILURE:
             return {...state, loading: false, hasErrors: true }
         default:

@@ -15,7 +15,8 @@ import { ProductReviews } from '../components/ProductReviews'
 
 import '../index.css'
 
-const ProductDetails = ( { dispatch, products, comments, hasErrors, loading } ) => {
+//these are the props wrapper component is injecting?
+const ProductDetails = ( { dispatch, productList, commentList, hasErrors, loading } ) => {
     let { productId } = useParams()
     productId = Number(productId)
 
@@ -27,10 +28,9 @@ const ProductDetails = ( { dispatch, products, comments, hasErrors, loading } ) 
         dispatch(fetchComments())
     },[dispatch])
 
-    console.log(products)
-    function showProductReview( comments ){
-        if(comments && Object.keys(comments).length){
-            return comments.map(comment => {
+    function showProductReview( commentList ){
+        if(commentList && Object.keys(commentList).length){
+            return commentList.map(comment => {
                 return( 
                     <div>
                         {productId === comment.productId && <ProductReviews key={comment.id} comment={comment} />}
@@ -39,9 +39,8 @@ const ProductDetails = ( { dispatch, products, comments, hasErrors, loading } ) 
             })
         }
     }
-
-    if(products && Object.keys(products).length){           
-        return products.map(product => {
+    if(productList && Object.keys(productList).length){           
+        return productList.map(product => {
             if(product.id === productId){
                 return (
                     <div>
@@ -52,12 +51,12 @@ const ProductDetails = ( { dispatch, products, comments, hasErrors, loading } ) 
                         <ProductImages key={product.id} images={product.images} />
 
                         {/* product review form*/}
-                        <ProductReviewForm productId={productId} commentId={comments.length}/>
+                        <ProductReviewForm productId={productId} commentId={commentList.length}/>
                         
                         {/* product review */}
                         <div className='product--review--display'>
                             <h2>Customer's reviews</h2>
-                            {showProductReview(comments)}
+                            {showProductReview(commentList)}
                         </div>
                     </div>
                 );
@@ -68,12 +67,14 @@ const ProductDetails = ( { dispatch, products, comments, hasErrors, loading } ) 
 
 const mapStateToProps = state => {
     return ({
-        products: state.products.products,
-        comments: state.comments.comments,
+        //products - productList
+        productList: state.products.productList,
+        commentList: state.comments.commentList,
         loading: { products: state.products.loading, comments: state.comments.loading },
         hasErrors: { products: state.products.hasErrors, comments: state.comments.hasErrors },
     })
 }
-
-// export default ProductDetails;
+//The return of connect() is a wrapper function that takes your 
+//component and returns a wrapper component with the additional props 
+//it injects
 export default connect(mapStateToProps)(ProductDetails);

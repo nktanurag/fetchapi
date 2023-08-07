@@ -54,6 +54,7 @@ export const ProductReviewForm = ({ productId, commentId, addComment}) => {
                     placeholder='Your Name' 
                     value={customerName}
                     onChange={onNameChange}
+                    required
                 />
 
                 {/* <label for="customerEmail">Email</label> */}
@@ -64,6 +65,7 @@ export const ProductReviewForm = ({ productId, commentId, addComment}) => {
                     autoComplete="off"
                     value={customerEmail}
                     onChange={onEmailChange}
+                    required
                 />
 
                 <label htmlFor="rating">Rating</label>
@@ -72,7 +74,9 @@ export const ProductReviewForm = ({ productId, commentId, addComment}) => {
                     name="rating"
                     value={rating}
                     onChange={onRatingChange}
+                    required
                 >
+                    <option value="" selected disabled hidden>Choose rating</option>
                     <option value="1">1☆</option>
                     <option value="2">2☆</option>
                     <option value="3">3☆</option>

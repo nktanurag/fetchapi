@@ -11,9 +11,9 @@ export const ADD_COMMENT_FAILURE = 'ADD_COMMENT_FAILURE'
 export const getComments = () => ({
     type: GET_COMMENTS,
 })
-export const getCommentsSuccess = (comments) => ({
+export const getCommentsSuccess = (commentList) => ({
     type: GET_COMMENTS_SUCCESS,
-    payload: comments,
+    payload: commentList,
 })
 export const getCommentsFailure = () => ({
     type: GET_COMMENTS_FAILURE,
